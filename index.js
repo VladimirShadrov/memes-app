@@ -3,3 +3,5 @@ export class App {
     console.log(1);
   }
 }
+
+new App();

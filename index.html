@@ -7,11 +7,67 @@
     <title>Memes App</title>
   </head>
   <body>
-    <h1>Memes App</h1>
+    <div class="container">
+      <div class="memes">
+        <div class="memes__settings">
+          <h2 class="block__title">Настройки:</h2>
+          <div class="settings">
+            <div class="setup">
+              <div class="setup__title">Мем</div>
+              <div class="setup__field-wrapper">
+                <div class="setup__field-head">
+                  <div class="text">One Does Not Simply</div>
+                  <div class="icon">
+                    <svg width="16" height="9" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M7.29289 8.70711C7.68342 9.09763 8.31658 9.09763 8.70711 8.70711L15.0711 2.34315C15.4616 1.95262 15.4616 1.31946 15.0711 0.928932C14.6805 0.538408 14.0474 0.538408 13.6569 0.928932L8 6.58579L2.34315 0.928932C1.95262 0.538408 1.31946 0.538408 0.928932 0.928932C0.538408 1.31946 0.538408 1.95262 0.928932 2.34315L7.29289 8.70711ZM7 7L7 8L9 8L9 7L7 7Z"
+                        fill="#222222"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div class="setup__list-wrapper" data-active-class="setup__list-wrapper-active">
+                  <ul class="setup__list">
+                    <li class="setup__list-item">Item</li>
+                    <li class="setup__list-item">Item</li>
+                    <li class="setup__list-item">Item</li>
+                    <li class="setup__list-item">Item</li>
+                    <li class="setup__list-item">Item</li>
+                    <li class="setup__list-item">Item</li>
+                    <li class="setup__list-item">Item</li>
+                    <li class="setup__list-item">Item</li>
+                    <li class="setup__list-item">Item</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="setup">
+              <div class="setup__title">Текст сверху</div>
+              <div class="setup__field-wrapper">
+                <input class="setup__field" type="text" placeholder="Введите текст.." />
+              </div>
+            </div>
+            <div class="setup">
+              <div class="setup__title">Текст снизу</div>
+              <div class="setup__field-wrapper">
+                <input class="setup__field" type="text" placeholder="Введите текст.." />
+              </div>
+            </div>
+          </div>
+        </div>
 
-    <script type="module">
-      import { App } from './index.js';
-      new App();
-    </script>
+        <div class="memes__preview">
+          <h2 class="block__title">Превью:</h2>
+
+          <div class="mem">
+            <img class="mem__image" src="./image.png" alt="mem" />
+            <p class="mem__text text-top">Нельзя просто так</p>
+            <p class="mem__text text-bottom">Взять и...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./index.js"></script>
   </body>
 </html>

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -6,4 +8,256 @@
 
 body {
   min-height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 35px;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 50px 12px 12px;
+  /* overflow: hidden; */
+}
+
+.memes {
+  display: flex;
+  align-items: flex-start;
+  gap: 200px;
+}
+
+.memes__settings,
+.memes__preview {
+  width: calc(50% - 100px);
+}
+
+.block__title {
+  font-size: 50px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.setup {
+  margin-bottom: 40px;
+}
+
+.setup:last-child {
+  margin-bottom: 0;
+}
+
+input.setup__field {
+  font-size: 25px;
+}
+
+.setup__title {
+  margin-bottom: 12px;
+}
+
+.setup__field-wrapper {
+  border: 1px solid black;
+  border-radius: 15px;
+  position: relative;
+}
+
+.setup__field-wrapper:hover {
+  border: 1px solid blue;
+}
+.setup__field-wrapper:hover .setup__list-wrapper {
+  border: 1px solid blue;
+}
+
+input.setup__field {
+  border: none;
+  border-radius: 15px;
+  outline: none;
+  width: 100%;
+  height: 54px;
+  padding: 12px 22px;
+}
+
+.setup__field-head {
+  position: relative;
+  height: 54px;
+  padding: 12px 60px 12px 22px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.setup__field-head .text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.icon {
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  top: calc(50% - 18px);
+  right: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+}
+
+.setup__field-head:hover > .icon {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.setup__list-wrapper {
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 10px;
+  max-height: 0px;
+  position: absolute;
+  top: 100%;
+  left: -1px;
+  width: calc(100% + 2px);
+  background: white;
+  z-index: -1;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.setup__list-wrapper.setup__list-wrapper-active {
+  max-height: 350px;
+  opacity: 1;
+  z-index: 1;
+}
+
+.setup__list {
+  list-style: none;
+  max-height: 330px;
+  overflow-y: auto;
+}
+
+.setup__list-item {
+  transition: all 0.2s;
+  padding-right: 10px;
+  cursor: pointer;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.setup__list-item:last-child {
+  margin-bottom: 0;
+}
+
+.setup__list-item:hover {
+  background: #ccc;
+  color: white;
+}
+
+.mem {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+}
+
+.mem .mem__image {
+  width: 100%;
+}
+
+.mem__text {
+  position: absolute;
+  text-align: center;
+  color: white;
+  width: calc(100% - 40px);
+}
+
+.mem__text.text-top {
+  top: 20px;
+  left: 20px;
+}
+.mem__text.text-bottom {
+  bottom: 20px;
+  left: 20px;
+}
+
+@media (max-width: 1350px) {
+  .memes {
+    gap: 20px;
+  }
+
+  .memes__settings,
+  .memes__preview {
+    width: calc(50% - 10px);
+  }
+}
+@media (max-width: 1050px) {
+  .memes {
+    gap: 20px;
+    flex-direction: column;
+  }
+
+  .memes__settings,
+  .memes__preview {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 20px 12px 12px;
+  }
+
+  .block__title {
+    font-size: 26px;
+    margin-bottom: 16px;
+  }
+
+  body {
+    font-size: 18px;
+  }
+
+  .setup__field-head,
+  input.setup__field {
+    height: 40px;
+  }
+
+  .setup__field-head {
+    padding: 12px 45px 12px 12px;
+  }
+
+  input.setup__field {
+    padding: 4px 12px;
+    font-size: 18px;
+  }
+
+  .icon {
+    height: 30px;
+    width: 30px;
+    top: calc(50% - 15px);
+    right: 8px;
+  }
+
+  .setup {
+    margin-bottom: 16px;
+  }
+
+  .setup__title {
+    margin-bottom: 8px;
+  }
+
+  .mem__text {
+    width: calc(100% - 24px);
+  }
+
+  .mem__text.text-top {
+    top: 12px;
+    left: 12px;
+  }
+
+  .mem__text.text-bottom {
+    bottom: 12px;
+    left: 12px;
+  }
 }
