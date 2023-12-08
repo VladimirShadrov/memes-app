@@ -1,7 +1,3 @@
-export class App {
-  constructor() {
-    console.log(1);
-  }
-}
+import { Controller } from './components/controller.js';
 
-new App();
+new Controller();
