@@ -171,6 +171,8 @@ input.setup__field {
   text-align: center;
   color: white;
   width: calc(100% - 40px);
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
 }
 
 .mem__text.text-top {

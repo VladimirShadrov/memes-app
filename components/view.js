@@ -14,6 +14,7 @@ export class View {
     this.$textTop = document.querySelector('.js-text-top');
     this.$textBottom = document.querySelector('.js-text-bottom');
     this.isListOpen = false;
+    this.maxTextLength = 50;
 
     this.addListeners();
   }
@@ -93,6 +94,21 @@ export class View {
     this.$textBottom.innerText = textBottom;
     this.$topTextInput.value = textTop;
     this.$bottomTextInput.value = textBottom;
+    this.setTextVisibility(this.$topTextInput, this.$textTop);
+    this.setTextVisibility(this.$bottomTextInput, this.$textBottom);
+  }
+
+  /**
+   * Задает видимость для текста, введенного в мем
+   * @param {HTMLElement} input
+   * @param {HTMLElement} textNode
+   */
+  setTextVisibility(input, textNode) {
+    if (input.value.length) {
+      textNode.style.opacity = 1;
+    } else {
+      textNode.style.opacity = 0;
+    }
   }
 
   /**
@@ -115,14 +131,24 @@ export class View {
    * Обработчик события для поля создания верхнего текста
    */
   topTextChanged = () => {
-    this.notifyTopTextChanged(this.$topTextInput.value);
+    if (this.$topTextInput.value.length <= this.maxTextLength) {
+      this.notifyTopTextChanged(this.$topTextInput.value);
+      this.setTextVisibility(this.$topTextInput, this.$textTop);
+    } else {
+      this.$topTextInput.value = this.$topTextInput.value.slice(0, this.maxTextLength);
+    }
   };
 
   /**
    * Обработчик события для поля создания нижнего текста
    */
   bottomTextChanged = () => {
-    this.notifyBottomTextChanged(this.$bottomTextInput.value);
+    if (this.$bottomTextInput.value.length <= this.maxTextLength) {
+      this.notifyBottomTextChanged(this.$bottomTextInput.value);
+      this.setTextVisibility(this.$bottomTextInput, this.$textBottom);
+    } else {
+      this.$bottomTextInput.value = this.$bottomTextInput.value.slice(0, this.maxTextLength);
+    }
   };
 
   /**
