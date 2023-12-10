@@ -3,6 +3,7 @@ export class Model {
     this.getMemesForView = getMemesForView;
     this.getMemesForStorage = getMemesForStorage;
     this.memes = [];
+    this.selectedMem = null;
   }
   /**
    * Обрабатывает массив мемов и передает в View и Storage
@@ -21,6 +22,8 @@ export class Model {
         this.getMemesForStorage(this.memes);
         break;
     }
+
+    console.log('Memes: ', this.memes);
   };
 
   /**
@@ -39,5 +42,22 @@ export class Model {
         textBottom: '',
       };
     });
+  }
+
+  findMemById(id) {
+    if (this.selectedMem) {
+      this.updateMemesListItem();
+    }
+    this.selectedMem = this.memes.find((mem) => mem.id === id);
+    return this.selectedMem;
+  }
+
+  updateMemesListItem() {
+    let memIndex = this.memes.findIndex((mem) => mem.id === this.selectedMem.id);
+    if (memIndex !== -1) {
+      this.memes[memIndex] = this.selectedMem;
+    } else {
+      throw new Error('В массиве мемов такой элемент не найден');
+    }
   }
 }

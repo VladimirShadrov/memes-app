@@ -5,7 +5,7 @@ import { Storage } from './storage.js';
 
 export class Controller {
   constructor() {
-    this.view = new View();
+    this.view = new View({ getSelectedMemData: this.getSelectedMemData });
     this.model = new Model({
       getMemesForView: this.getMemesForView,
       getMemesForStorage: this.getMemesForStorage,
@@ -34,7 +34,9 @@ export class Controller {
    * Получает из модели список мемов для View
    * @param {Object[]} memes - Массив объектов с мемами
    */
-  getMemesForView = (memes) => {};
+  getMemesForView = (memes) => {
+    this.view.renderList(memes);
+  };
 
   /**
    * Получает из модели список мемов для Storage
@@ -42,5 +44,15 @@ export class Controller {
    */
   getMemesForStorage = (memes) => {
     this.storage.saveMemesList(memes);
+  };
+
+  /**
+   * Получает данные выбранного мема у модели и передает их в View
+   * @param {String} id
+   */
+  getSelectedMemData = (id) => {
+    const mem = this.model.findMemById(id);
+    this.view.setSelectedMem(mem);
+    console.log('Mem: ', mem);
   };
 }

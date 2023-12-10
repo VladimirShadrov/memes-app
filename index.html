@@ -14,9 +14,9 @@
           <div class="settings">
             <div class="setup">
               <div class="setup__title">Мем</div>
-              <div class="setup__field-wrapper">
-                <div class="setup__field-head">
-                  <div class="text">Выбери мем</div>
+              <div class="js-dropdown setup__field-wrapper">
+                <div class="js-dropdown-head setup__field-head">
+                  <div class="js-dropdown-head-text text">Выбери мем</div>
                   <div class="icon">
                     <svg width="16" height="9" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -26,31 +26,21 @@
                     </svg>
                   </div>
                 </div>
-                <div class="setup__list-wrapper" data-active-class="setup__list-wrapper-active">
-                  <ul class="setup__list">
-                    <li class="setup__list-item">Item</li>
-                    <li class="setup__list-item">Item</li>
-                    <li class="setup__list-item">Item</li>
-                    <li class="setup__list-item">Item</li>
-                    <li class="setup__list-item">Item</li>
-                    <li class="setup__list-item">Item</li>
-                    <li class="setup__list-item">Item</li>
-                    <li class="setup__list-item">Item</li>
-                    <li class="setup__list-item">Item</li>
-                  </ul>
+                <div class="js-list-wrapper setup__list-wrapper" data-active-class="setup__list-wrapper-active">
+                  <ul class="js-list setup__list"></ul>
                 </div>
               </div>
             </div>
             <div class="setup">
               <div class="setup__title">Текст сверху</div>
               <div class="setup__field-wrapper">
-                <input class="setup__field" type="text" placeholder="Введите текст.." />
+                <input class="js-top-text-input setup__field" type="text" placeholder="Введите текст.." />
               </div>
             </div>
             <div class="setup">
               <div class="setup__title">Текст снизу</div>
               <div class="setup__field-wrapper">
-                <input class="setup__field" type="text" placeholder="Введите текст.." />
+                <input class="js-bottom-text-input setup__field" type="text" placeholder="Введите текст.." />
               </div>
             </div>
           </div>
@@ -60,9 +50,9 @@
           <h2 class="block__title">Превью:</h2>
 
           <div class="mem">
-            <img class="mem__image" alt="mem" />
-            <p class="mem__text text-top">Нельзя просто так</p>
-            <p class="mem__text text-bottom">Взять и...</p>
+            <img class="js-mem-image mem__image" />
+            <p class="js-text-top mem__text text-top">Нельзя просто так</p>
+            <p class="js-text-bottom mem__text text-bottom">Взять и...</p>
           </div>
         </div>
       </div>
