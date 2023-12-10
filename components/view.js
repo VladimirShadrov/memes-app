@@ -1,6 +1,8 @@
 export class View {
-  constructor({ getSelectedMemData }) {
-    this.selectedMemData = getSelectedMemData;
+  constructor({ notifyAboutSelectedMem, notifyBottomTextChanged, notifyTopTextChanged }) {
+    this.notifyAboutSelectedMem = notifyAboutSelectedMem;
+    this.notifyTopTextChanged = notifyTopTextChanged;
+    this.notifyBottomTextChanged = notifyBottomTextChanged;
     this.$dropdown = document.querySelector('.js-dropdown');
     this.$dropdownHead = this.$dropdown.querySelector('.js-dropdown-head');
     this.$dropdownHeadText = this.$dropdown.querySelector('.js-dropdown-head-text');
@@ -15,30 +17,51 @@ export class View {
 
     this.addListeners();
   }
+  /**
+   * Добавляет слушатели событий
+   */
   addListeners() {
     this.$list.addEventListener('click', this.selectMem);
     this.$dropdownHead.addEventListener('click', this.showLIst);
+    this.$topTextInput.addEventListener('input', this.topTextChanged);
+    this.$bottomTextInput.addEventListener('input', this.bottomTextChanged);
     document.addEventListener('click', this.bodyClickHandler);
   }
 
+  /**
+   * Выбирает мем из выпадающего списка
+   * @param {Event} event
+   */
   selectMem = (event) => {
     if (event.target.closest('[data-type="option"]')) {
       this.$dropdownHeadText.innerText = event.target.innerText;
-      this.selectedMemData(event.target.dataset.id);
+      this.notifyAboutSelectedMem(event.target.dataset.id);
       this.hideList();
     }
   };
 
+  /**
+   * Отображает выпадающий список
+   */
   showLIst = () => {
     this.$listWrapper.classList.add(this.$listWrapper.dataset.activeClass);
     setTimeout(() => (this.isListOpen = true), 0);
   };
 
+  /**
+   * Скрывает выпадающий список
+   */
   hideList() {
     this.$listWrapper.classList.remove(this.$listWrapper.dataset.activeClass);
     this.isListOpen = false;
   }
 
+  /**
+   * Создает элемент выпадающего списка
+   * @param {String} text
+   * @param {String} id
+   * @returns {HTMLElement}
+   */
   getOption(text, id) {
     const option = document.createElement('li');
     option.classList.add('setup__list-item');
@@ -48,6 +71,10 @@ export class View {
     return option;
   }
 
+  /**
+   * Заполняет выпадающий список
+   * @param {Object[]} list
+   */
   renderList(list) {
     list.forEach((option) => {
       const { name, id } = option;
@@ -55,6 +82,10 @@ export class View {
     });
   }
 
+  /**
+   * Отображает данные выбранного мема на странице
+   * @param {Object} memData
+   */
   setSelectedMem(memData) {
     const { url, textTop, textBottom } = memData;
     this.$memImage.src = url;
@@ -64,13 +95,51 @@ export class View {
     this.$bottomTextInput.value = textBottom;
   }
 
-  updateTopText(memData) {
-    const textTop = memData;
+  /**
+   * Обновляет верхний текст
+   * @param {String} text
+   */
+  updateTopText(text) {
+    this.$textTop.innerText = text;
   }
 
+  /**
+   * Обновляет нижний текст
+   * @param {String} text
+   */
+  updateBottomText(text) {
+    this.$textBottom.innerText = text;
+  }
+
+  /**
+   * Обработчик события для поля создания верхнего текста
+   */
+  topTextChanged = () => {
+    this.notifyTopTextChanged(this.$topTextInput.value);
+  };
+
+  /**
+   * Обработчик события для поля создания нижнего текста
+   */
+  bottomTextChanged = () => {
+    this.notifyBottomTextChanged(this.$bottomTextInput.value);
+  };
+
+  /**
+   * Обработчик клика по Body
+   * @param {Event} event
+   */
   bodyClickHandler = (event) => {
     if (this.isListOpen && !this.$dropdown.contains(event.target)) {
       this.hideList();
     }
   };
+
+  /**
+   * Очищяет текстовые поля
+   */
+  clearInputs() {
+    this.$topTextInput.value = '';
+    this.$bottomTextInput.value = '';
+  }
 }

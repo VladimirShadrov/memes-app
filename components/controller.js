@@ -5,7 +5,11 @@ import { Storage } from './storage.js';
 
 export class Controller {
   constructor() {
-    this.view = new View({ getSelectedMemData: this.getSelectedMemData });
+    this.view = new View({
+      notifyAboutSelectedMem: this.notifyAboutSelectedMem,
+      notifyBottomTextChanged: this.bottomTextChanged,
+      notifyTopTextChanged: this.topTextChanged,
+    });
     this.model = new Model({
       getMemesForView: this.getMemesForView,
       getMemesForStorage: this.getMemesForStorage,
@@ -47,12 +51,39 @@ export class Controller {
   };
 
   /**
-   * Получает данные выбранного мема у модели и передает их в View
+   * Уведомляет об изменении выбранного мема
    * @param {String} id
    */
-  getSelectedMemData = (id) => {
+  notifyAboutSelectedMem = (id) => {
     const mem = this.model.findMemById(id);
     this.view.setSelectedMem(mem);
-    console.log('Mem: ', mem);
+  };
+
+  /**
+   * Уведомляет об изменении верхнего текста
+   * @param {String} text
+   */
+  topTextChanged = (text) => {
+    if (!this.model.selected) {
+      this.view.clearInputs();
+      return;
+    }
+
+    const textTop = this.model.updateTopTextData(text);
+    this.view.updateTopText(textTop);
+  };
+
+  /**
+   * Уведомляет об изменении нижнего текста
+   * @param {String} text
+   */
+  bottomTextChanged = (text) => {
+    if (!this.model.selected) {
+      this.view.clearInputs();
+      return;
+    }
+
+    const textBottom = this.model.updateBottomTextData(text);
+    this.view.updateBottomText(textBottom);
   };
 }

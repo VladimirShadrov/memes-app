@@ -22,8 +22,6 @@ export class Model {
         this.getMemesForStorage(this.memes);
         break;
     }
-
-    console.log('Memes: ', this.memes);
   };
 
   /**
@@ -44,20 +42,53 @@ export class Model {
     });
   }
 
+  /**
+   * Находит мем в массиве мемов
+   * @param {String} id
+   * @returns Данные найденного мема
+   */
   findMemById(id) {
     if (this.selectedMem) {
-      this.updateMemesListItem();
+      this.saveMemesListItem();
     }
     this.selectedMem = this.memes.find((mem) => mem.id === id);
     return this.selectedMem;
   }
 
-  updateMemesListItem() {
+  /**
+   * Сохраняет данные выбранного мема в списке мемов и в localStorage
+   */
+  saveMemesListItem() {
     let memIndex = this.memes.findIndex((mem) => mem.id === this.selectedMem.id);
     if (memIndex !== -1) {
       this.memes[memIndex] = this.selectedMem;
+      this.getMemesForStorage(this.memes);
     } else {
       throw new Error('В массиве мемов такой элемент не найден');
     }
+  }
+
+  /**
+   * Обновляет данные верхнего текста у выбранного мема
+   * @param {String} text
+   * @returns верхний текст
+   */
+  updateTopTextData(text) {
+    this.selectedMem.textTop = text;
+    return this.selectedMem.textTop;
+  }
+
+  /**
+   * Обновляет данные нижнего текста у выбранного мема
+   * @param {String} text
+   * @returns нижний текст
+   */
+  updateBottomTextData(text) {
+    this.selectedMem.textBottom = text;
+    return this.selectedMem.textBottom;
+  }
+
+  get selected() {
+    return this.selectedMem;
   }
 }
